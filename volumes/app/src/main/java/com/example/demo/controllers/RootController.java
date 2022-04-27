@@ -41,4 +41,22 @@ public class RootController {
 		model.addAttribute("message", "お問い合わせを受け付けました。");
 		return "root/form";
 	}
+	
+	@GetMapping("/form2")
+	public String form2(InquiryForm inquiryForm) {
+		return "root/form2";
+	}
+
+	@PostMapping("/form2")
+	public String form2(@Validated InquiryForm inquiryForm, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "root/form2";
+		}
+
+		// RDBと連携できることを確認しておきます。
+		repository.saveAndFlush(inquiryForm);
+		inquiryForm.clear();
+		model.addAttribute("message", "お問い合わせを受け付けました。");
+		return "root/form";
+	}
 }
