@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.models.InquiryForm;
+import com.example.demo.models.InquiryForm2;
+
 import com.example.demo.repositries.InquiryRepository;
+import com.example.demo.repositries.InquiryRepository2;
 
 @Controller
 @RequestMapping("/")
@@ -18,6 +21,9 @@ public class RootController {
 
 	@Autowired
 	InquiryRepository repository;
+	
+	@Autowired
+	InquiryRepository2 repository2;
 
 	@GetMapping
 	public String index() {
@@ -48,14 +54,14 @@ public class RootController {
 	}
 
 	@PostMapping("/form2")
-	public String form2(@Validated InquiryForm inquiryForm, BindingResult bindingResult, Model model) {
+	public String form2(@Validated InquiryForm2 inquiryForm2, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			return "root/form2";
 		}
 
 		// RDBと連携できることを確認しておきます。
-		repository.saveAndFlush(inquiryForm);
-		inquiryForm.clear();
+		repository2.saveAndFlush(inquiryForm2);
+		inquiryForm2.clear();
 		model.addAttribute("message", "お問い合わせを受け付けました。");
 		return "root/form";
 	}
