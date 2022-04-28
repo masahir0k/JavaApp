@@ -49,7 +49,7 @@ public class RootController {
 	}
 	
 	@GetMapping("/form2")
-	public String form2(InquiryForm inquiryForm) {
+	public String form2(InquiryForm2 inquiryForm2) {
 		return "root/form2";
 	}
 
@@ -63,6 +63,6 @@ public class RootController {
 		repository2.saveAndFlush(inquiryForm2);
 		inquiryForm2.clear();
 		model.addAttribute("message", "お問い合わせを受け付けました。");
-		return "root/form";
+		return "root/form2";
 	}
 }
