@@ -19,7 +19,7 @@ import com.example.demo.repositries.InquiryRepository2;
 @RequestMapping("/")
 public class RootController {
 
-	@Autowired
+	@Autowired  //他のクラスを呼び出すことができる. InquiryRepositoryインスタンスをnewしなくても、repositoryのメソッドを使用できています
 	InquiryRepository repository;
 	
 	@Autowired
