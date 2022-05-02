@@ -15,6 +15,8 @@ import com.example.demo.models.InquiryForm2;
 import com.example.demo.repositries.InquiryRepository;
 import com.example.demo.repositries.InquiryRepository2;
 
+import antlr.collections.List;
+
 @Controller
 @RequestMapping("/")
 public class RootController {
@@ -25,10 +27,21 @@ public class RootController {
 	@Autowired
 	InquiryRepository2 repository2;
 
+//　		元コード
+//		@GetMapping
+//		public String index() {
+//			return "root/index";
+//		}	
+	
+//	上の元コードから一覧表示を作成中
 	@GetMapping
-	public String index() {
+	public String inquiryList(Model model) {
+		List<InquiryForm> items = InquiryForm.findAll();
+		model.addAttribute("index", items);
 		return "root/index";
 	}
+	
+
 
 	@GetMapping("/form")
 	public String form(InquiryForm inquiryForm) {
