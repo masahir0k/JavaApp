@@ -39,6 +39,9 @@
 								<li><a th:href="@{/}">ホーム</a></li>
 								<li><a th:href="@{/form}">お問い合わせ</a></li>
 								<li><a th:href="@{/form2}">お問い合わせ2</a></li>
+						        <tr th:each="item:${items}" th:object="${item}">
+						        	<td th:text="*{id}"></td>
+					          	</tr>
 							</ul>
 						</div>
 					</nav>
