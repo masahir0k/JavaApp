@@ -27,17 +27,17 @@ public class RootController {
 	@Autowired
 	InquiryRepository2 repository2;
 
-//　		元コード
-//		@GetMapping
-//		public String index() {
-//			return "root/index";
-//		}	
+//　	元コード
+//	@GetMapping
+//	public String index() {
+//		return "root/index";
+//	}	
 	
 //	上の元コードから一覧表示を作成中
 	@GetMapping
 	public String inquiryList(Model model) {
 		List<InquiryForm> items = InquiryForm.findAll();
-		model.addAttribute("index", items);
+		model.addAttribute("items", items);
 		return "root/index";
 	}
 	
