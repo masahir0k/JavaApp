@@ -39,9 +39,6 @@
 								<li><a th:href="@{/}">ホーム</a></li>
 								<li><a th:href="@{/form}">お問い合わせ</a></li>
 								<li><a th:href="@{/form2}">お問い合わせ2</a></li>
-						        <tr th:each="item:${items}" th:object="${item}">
-						        	<td th:text="*{id}"></td>
-					          	</tr>
 							</ul>
 						</div>
 					</nav>
@@ -55,50 +52,28 @@
 	<main>
 		<section>
 			<div class="container">
-				<h2 class="catch">Works</h2>
-				<div class="row">
-					<div class="col span-4">
-						<figure>
-							<img th:src="@{/img/catch.jpg}" alt="画像">
-							<figcaption>キャプション</figcaption>
-						</figure>
+				<h2 class="catch">問い合わせのリスト</h2>
+				<table class="table table-striped" align="center">
+					<thread>
+						<tr>
+							<th>ID</th>
+							<th>名前</th>
+							<th>メール</th>
+							<th>文章</th>
+						</tr>
+					</thread>
+				<tbody>
+					<div class="row">
+						<tr th:each="item:${items}" th:object="${item}">
+							<td th:text="*{id}"></td>
+							<td th:text="*{name}"></td>
+							<td th:text="*{mail}"></td>
+							<td th:text="*{content}"></td>
+	  					</tr>
 					</div>
-					<div class="col span-4">
-						<figure>
-							<img th:src="@{/img/catch.jpg}" alt="画像">
-							<figcaption>キャプション</figcaption>
-						</figure>
-					</div>
-					<div class="col span-4">
-						<figure>
-							<img th:src="@{/img/catch.jpg}" alt="画像">
-							<figcaption>キャプション</figcaption>
-						</figure>
-					</div>
-				</div>
+				</tbody>
 			</div>
 		</section>
 	</main>
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col span-4">
-					<h5>フッター１</h5>
-					<p>ここにSNSやテキストなどが入ります。SNSやテキストなどが入ります。</p>
-				</div>
-				<div class="col span-4">
-					<h5>フッター２</h5>
-					<p>ここにSNSやテキストなどが入ります。SNSやテキストなどが入ります。</p>
-				</div>
-				<div class="col span-4">
-					<h5>フッター３</h5>
-					<p>ここにSNSやテキストなどが入ります。SNSやテキストなどが入ります。</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<p id="pagetop">
-		<a href="#">TOP</a>
-	</p>
 </body>
 </html>
