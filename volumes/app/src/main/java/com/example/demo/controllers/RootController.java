@@ -21,7 +21,8 @@ import com.example.demo.repositries.InquiryRepository2;
 import ch.qos.logback.core.joran.spi.EventPlayer;
 
 //import antlr.collections.List;
-import java.util.List; 
+import java.util.List;
+import java.util.Optional; 
 
 @Controller
 @RequestMapping("/")
@@ -95,13 +96,16 @@ public class RootController {
 	 * making edit page controller
 	 */
 	@GetMapping("{id}/edit")
-	public String edit(@PathVariable String id, Model model) {
-		Item item = repository.findById(id);
-		model.addAtribute("item", item);
+	public String edit(@PathVariable Long id, Model model) {
+		Optional<InquiryForm> item = repository.findById(id);
+		model.addAttribute("item", item);
 		return "root/edit";
 	}
-
 	
+//	@GetMapping("/edit")
+//	public String edit() {
+//		return "root/edit";
+//	}
 	
 	
 	
