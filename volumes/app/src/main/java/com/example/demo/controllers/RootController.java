@@ -7,16 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.models.InquiryForm;
-import com.example.demo.models.InquiryForm2;
 
 import com.example.demo.repositries.InquiryRepository;
-import com.example.demo.repositries.InquiryRepository2;
 
 import ch.qos.logback.core.joran.spi.EventPlayer;
 
@@ -28,11 +27,14 @@ import java.util.Optional;
 @RequestMapping("/")
 public class RootController {
 
-	@Autowired  //他のクラスを呼び出すことができる. InquiryRepositoryインスタンスをnewしなくても、repositoryのメソッドを使用できています
+	/*
+	 * 他のクラスを呼び出すことができる. 
+	 * InquiryRepositoryインスタンスをnewしなくても、repositoryのメソッドを使用できる
+	 *   InquiryRepository = repository; 
+	 *   repository= new repository();
+	 */
+	@Autowired
 	InquiryRepository repository;
-	
-	@Autowired  //InquiryRepository2 = repository2; repository2= new repository2();
-	InquiryRepository2 repository2;
 
 	@GetMapping
 	public String index() {
@@ -75,23 +77,6 @@ public class RootController {
 		return "root/form";
 	}
 	
-	@GetMapping("/form2")
-	public String form2(InquiryForm2 inquiryForm2) {
-		return "root/form2";
-	}
-
-	@PostMapping("/form2")
-	public String form2(@Validated InquiryForm2 inquiryForm2, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			return "root/form2";
-		}
-
-		// RDBと連携できることを確認しておきます。
-		repository2.saveAndFlush(inquiryForm2);
-		inquiryForm2.clear();
-		model.addAttribute("message", "お問い合わせを受け付けました。");
-		return "root/form2";
-	}
 	/*
 	 * making edit page controller
 	 */
@@ -102,10 +87,12 @@ public class RootController {
 		return "root/edit";
 	}
 	
-//	@GetMapping("/edit")
-//	public String edit() {
-//		return "root/edit";
-//	}
+    @PutMapping("{id}")
+    public String update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
+        inquiryform.setId(id);
+        repository.save(inquiryform);
+        return "redirect:/root/list";
+    }
 	
 	
 	

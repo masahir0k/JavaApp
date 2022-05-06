@@ -43,9 +43,9 @@ public class InquiryForm implements Serializable {
 	}
 	
 	/*
-	 * RootControllerのedit functionのため追加
+	 * RootControllerのedit & update functionのため追加
 	 */
 	public void setId(Long id) {
-		this.id = this.id;
+		this.id = id;
 	}
 }
