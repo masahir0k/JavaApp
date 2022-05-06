@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一覧表示</title>
+<link rel="stylesheet" media="all" th:href="@{/css/ress.min.css}" />
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
+<script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/js/style.js}"></script>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
+
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col span-12">
+					<div class="head">
+						<h1>
+							
+						</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col span-12">
+					<nav>
+						<div id="open">
+							<img th:src="@{/img/button.png}">
+						</div>
+						<div id="close">
+							<img th:src="@{/img/button2.png}">
+						</div>
+						<div id="navi">
+
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section>
+			<div class="container">
+				<h1 class="catch">問い合わせのリスト</h1>
+				<div align="center"><a th:href="@{/}">Top</a></div>
+				<table class="table table-striped" align="center">
+					<thread>
+						<tr>
+							<th>ID</th>
+							<th>名前</th>
+							<th>メール</th>
+							<th>問い合わせ</th>
+						</tr>
+					</thread>
+				<tbody>
+					<div class="row">
+						<tr th:each="item:${items}" th:object="${item}">
+							<td th:text="*{id}"></td>
+							<td th:text="*{name}"></td>
+							<td th:text="*{mail}"></td>
+							<td th:text="*{content}"></td>
+	  					</tr>
+					</div>
+				</tbody>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

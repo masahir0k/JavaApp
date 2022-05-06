@@ -1,11 +1,14 @@
 package com.example.demo.controllers;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +17,8 @@ import com.example.demo.models.InquiryForm2;
 
 import com.example.demo.repositries.InquiryRepository;
 import com.example.demo.repositries.InquiryRepository2;
+
+import ch.qos.logback.core.joran.spi.EventPlayer;
 
 //import antlr.collections.List;
 import java.util.List; 
@@ -25,15 +30,31 @@ public class RootController {
 	@Autowired  //他のクラスを呼び出すことができる. InquiryRepositoryインスタンスをnewしなくても、repositoryのメソッドを使用できています
 	InquiryRepository repository;
 	
-	@Autowired
+	@Autowired  //InquiryRepository2 = repository2; repository2= new repository2();
 	InquiryRepository2 repository2;
 
-    @GetMapping
+	@GetMapping
+	public String index() {
+		return "root/index";
+	}
+	
+    @GetMapping("/list")
     public String inquiryList(Model model) {
         List<InquiryForm> items = repository.findAll();
         model.addAttribute("items", items);
-        return "root/index";
+        return "root/list";
     }
+    //inquiryListメソッドの引数にModel型の値を設定。
+    //　パラメーターとしてModelインスタンスがmodel変数に渡される
+    
+    //構成：RootController視点 = repositoryの実態
+    //右側のitemsリストを、左側でどう使うのか
+    //InquiryFormテーブルからitemsリストを作り、
+    //　repository.findAll(List<InquiryForm> = 全エンティティ)を入れて使う
+    //　（repository = InquiryRepository newと同じなのでメソッドが使える）
+    
+    //model変数（インスタンス）を使って、ビューにitemリストを表示させる変数名を設定
+
 	
 	@GetMapping("/form")
 	public String form(InquiryForm inquiryForm) {
@@ -70,4 +91,18 @@ public class RootController {
 		model.addAttribute("message", "お問い合わせを受け付けました。");
 		return "root/form2";
 	}
+	/*
+	 * making edit page controller
+	 */
+	@GetMapping("{id}/edit")
+	public String edit(@PathVariable String id, Model model) {
+		Item item = repository.findById(id);
+		model.addAtribute("item", item);
+		return "root/edit";
+	}
+
+	
+	
+	
+	
 }
