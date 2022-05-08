@@ -98,7 +98,7 @@ public class RootController {
     }
     
     @DeleteMapping("/list")
-    public String destroy(@PathVariable Long id, Model model) {
+    public String destroy(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
     	InquiryForm item = repository.findById(id);
     	repository.delete(item);
         return "redirect:/list";
