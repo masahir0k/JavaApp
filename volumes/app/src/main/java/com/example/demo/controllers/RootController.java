@@ -92,7 +92,8 @@ public class RootController {
     public String update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
         inquiryform.setId(id);
         repository.saveAndFlush(inquiryform);
-        return "redirect:/";
+//        return "redirect:{id}/edit";
+        return "root/list";
     }
 	
 	
