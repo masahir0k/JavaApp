@@ -35,8 +35,8 @@
 	    <div class="container">
 	    
 	      <!-- <form th:action="@{/items/{id}(id=*{id})}" th:method="put" th:object="${item}"> -->
-	      <!-- <form th:action="@{/{id}(id=*{id})/edit}" th:method="put" th:object="${item}"> -->
-	      <form th:action="@{/form}" th:method="put" th:object="${item}">
+	      <form th:action="@{/{id}(id=*{id})/edit}" th:method="put" th:object="${item}">
+	      <!-- <form th:action="@{/form}" th:method="put" th:object="${item}"> -->
 	        <div>
 	          <label>ID</label>
 	          <input type="text" th:field="*{id}" />

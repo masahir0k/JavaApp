@@ -55,6 +55,7 @@
 							<th>名前</th>
 							<th>メール</th>
 							<th>問い合わせ</th>
+							<th></th>				
 						</tr>
 					</thread>
 				<tbody>
@@ -64,6 +65,7 @@
 							<td th:text="*{name}"></td>
 							<td th:text="*{mail}"></td>
 							<td th:text="*{content}"></td>
+							<td><button class="btn btn-default"><a class="btn btn-default" th:href="@{/{id}/edit(id=*{id})}">編集</a></button</td>
 	  					</tr>
 					</div>
 				</tbody>

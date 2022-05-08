@@ -93,7 +93,7 @@ public class RootController {
         inquiryform.setId(id);
         repository.saveAndFlush(inquiryform);
 //        return "redirect:{id}/edit";
-        return "root/list";
+        return "root/{id}/edit";
     }
 	
 	
