@@ -10,6 +10,7 @@ import com.example.demo.models.InquiryForm;
 
 @Repository
 public interface InquiryRepository extends JpaRepository<InquiryForm, String>{
-	Optional<InquiryForm> findById(Long id);
+//	Optional<InquiryForm> findById(Long id);
+	InquiryForm findById(Long id);
 	List<InquiryForm> findAll();
 }

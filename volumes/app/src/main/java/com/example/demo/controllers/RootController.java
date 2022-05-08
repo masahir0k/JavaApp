@@ -82,16 +82,17 @@ public class RootController {
 	 */
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model) {
-		Optional<InquiryForm> item = repository.findById(id);
+//		Optional<InquiryForm> item = repository.findById(id);
+		InquiryForm item = repository.findById(id);
 		model.addAttribute("item", item);
 		return "root/edit";
 	}
 	
-    @PutMapping("{id}")
+    @PutMapping("{id}/edit")
     public String update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
         inquiryform.setId(id);
-        repository.save(inquiryform);
-        return "redirect:/root/list";
+        repository.saveAndFlush(inquiryform);
+        return "redirect:/";
     }
 	
 	
