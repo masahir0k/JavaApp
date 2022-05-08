@@ -53,7 +53,8 @@
 	          <label>Content</label>
 	          <input type="text" th:field="*{content}" />
 	        </div>
-	        <button class="btn btn-default" type="submit">更新</button>
+	        <a class="btn btn-default" th:href="@{edit(id=*{id})}">編集</a>
+	        
 	      </form>
 	      
 	    </div>
