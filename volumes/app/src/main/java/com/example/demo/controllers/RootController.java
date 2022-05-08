@@ -4,6 +4,7 @@ import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,6 +95,13 @@ public class RootController {
         repository.saveAndFlush(inquiryform);
 //        return "redirect:{id}/edit";
         return "root/{id}/edit";
+    }
+    
+    @DeleteMapping("/list")
+    public String destroy(@PathVariable Long id, Model model) {
+    	InquiryForm item = repository.findById(id);
+    	repository.delete(item);
+        return "redirect:/list";
     }
 	
 	

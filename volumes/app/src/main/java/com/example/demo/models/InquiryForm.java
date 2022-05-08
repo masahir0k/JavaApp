@@ -4,6 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import com.example.demo.repositries.InquiryRepository; //
+import com.example.demo.controllers.RootController;
 
 import lombok.Data;
 
@@ -42,10 +46,8 @@ public class InquiryForm implements Serializable {
 		content = null;
 	}
 	
-	/*
-	 * RootControllerのedit & update functionのため追加
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 }
