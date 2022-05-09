@@ -19,9 +19,7 @@
 			<div class="row">
 				<div class="col span-12">
 					<div class="head">
-						<h1>
-							<a th:href="@{/}">編集画面</a>
-						</h1>
+						<h1>編集画面</h1>
 					</div>
 				</div>
 			</div>
@@ -31,39 +29,32 @@
 		<img th:src="@{/img/subimg.jpg}" alt="お問い合わせ画像">
 	</div>
 	<main>
-
 	    <div class="container">
-	    
-	      <!-- <form th:action="@{/items/{id}(id=*{id})}" th:method="put" th:object="${item}"> -->
-	      <form th:action="@{/{id}(id=*{id})/edit}" th:method="put" th:object="${item}">
-	      <!-- <form th:action="@{/form}" th:method="put" th:object="${item}"> -->
-	        <div>
-	          <label>ID</label>
-	          <input type="text" th:field="*{id}" />
-	        </div>
-	        <div>
-	          <label>Name</label>
-	          <input type="text" th:field="*{name}" />
-	        </div>
-	        <div>
-	          <label>e-mail</label>
-	          <input type="text" th:field="*{mail}" />
-	        </div>
-	        <div>
-	          <label>Content</label>
-	          <input type="text" th:field="*{content}" />
-	        </div>
-	        <a class="btn btn-default" th:href="@{edit(id=*{id})}">編集</a>
-	        
-	      </form>
-	      
+			<form th:action="@{/{id}(id=*{id})}" th:method="put" th:object="${inquiryform}">
+				<div>
+				  	<label>ID</label>
+					<td th:text="*{id}"></td>
+				</div>
+				<div>
+				  	<label>Name</label>
+				  	<input type="text" th:field="*{name}" />
+				</div>
+				<div>
+				  	<label>e-mail</label>
+				  	<input type="text" th:field="*{mail}" />
+				</div>
+				<div>
+				  	<label>Content</label>
+				  	<input type="text" th:field="*{content}" />
+				</div>
+				<button class="btn btn-default" type="submit">更新</button>
+			</form>
+			<div class="pull-right">
+				<a class="btn btn-link" href="/list">一覧画面へ</a>
+			</div>
 	    </div>
-
-
 	</main>
 	<footer>
-
 	</footer>
-
 </body>
 </html>

@@ -55,8 +55,6 @@
 							<th>名前</th>
 							<th>メール</th>
 							<th>問い合わせ</th>
-							<th>編集ボタン</th>
-							<th>削除ボタン</th>				
 						</tr>
 					</thread>
 				<tbody>
@@ -67,15 +65,14 @@
 							<td th:text="*{mail}"></td>
 							<td th:text="*{content}"></td>
 							<td>
-								<button class="btn btn-default">
-									<a th:href="@{/{id}/edit(id=*{id})}">編集</a>
-								</button>
+								<form th:action="@{/{id}/edit(id=*{id})}" th:method="get">
+									<input class="btn btn-default btn-xs" type="submit" value="編集" />
+								</form>
 							</td>
-							<!-- <td><button class="btn btn-default"><a class="btn btn-default" th:href="@{update(id=*{id})}">編集</a></button></td> -->
 							<td>
-								<button class="btn btn-default" type="submit">
-									<a th:action="@{destroy(id=*{id})}" th:method="delete">削除</a>
-								</button>
+								<form th:action="@{/{id}(id=*{id})}" th:method="delete">
+									<input class="btn btn-default btn-xs" type="submit" value="削除" />
+								</form>
 							</td>
 	  					</tr>
 					</div>

@@ -4,8 +4,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -13,8 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import com.example.demo.repositries.InquiryRepository; //
-import com.example.demo.controllers.RootController;
 
 import lombok.Data;
 
@@ -22,11 +18,11 @@ import lombok.Data;
 @Entity
 @Table(name = "inquiry")
 public class InquiryForm implements Serializable {
-	private static final long serialVersionUID = -6647247658748349084L;
+	private static final Long serialVersionUID = -6647247658748349084L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotBlank
 	@Size(max = 10)
@@ -39,15 +35,4 @@ public class InquiryForm implements Serializable {
 	@NotBlank
 	@Size(max = 400)
 	private String content;
-	
-	public void clear() {
-		name = null;
-		mail = null;
-		content = null;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 }
