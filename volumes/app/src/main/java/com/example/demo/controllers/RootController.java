@@ -15,21 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.example.demo.models.InquiryForm;
-
 import com.example.demo.repositries.InquiryRepository;
-
 import ch.qos.logback.core.joran.spi.EventPlayer;
-
 import java.util.List;
-
 import javax.transaction.Transactional;
+import com.example.demo.controllers.RedirectUrlProperties;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
 @Transactional
+@RequiredArgsConstructor
 public class RootController {
+//    private final RedirectUrlProperties redirectUrlProperties;
+
+	@Autowired
+	RedirectUrlProperties redirectUrlProperties;
+	
     @Autowired
     InquiryRepository repository;
+
+    public String buildAdminRedirectUrl(String url) {
+        return UriComponentsBuilder.fromUriString(redirectUrlProperties.getUrl() + url).toUriString();
+    }
 
     @GetMapping
     public String index() {
@@ -66,15 +76,15 @@ public class RootController {
     }
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
+    public ModelAndView update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
         inquiryform.setId(id);
         repository.save(inquiryform);
-        return "redirect:/list";
+        return new ModelAndView("redirect:" + buildAdminRedirectUrl("/list"));
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) {
+    public ModelAndView destroy(@PathVariable Long id) {
         repository.deleteById(id);
-        return "redirect:/list";
+        return new ModelAndView("redirect:" + buildAdminRedirectUrl("/list"));
     }
 }

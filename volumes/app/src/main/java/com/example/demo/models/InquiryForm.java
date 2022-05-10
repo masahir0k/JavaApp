@@ -35,4 +35,5 @@ public class InquiryForm implements Serializable {
 	@NotBlank
 	@Size(max = 400)
 	private String content;
+
 }
