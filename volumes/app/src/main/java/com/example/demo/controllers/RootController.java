@@ -29,14 +29,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Transactional
 @RequiredArgsConstructor
 public class RootController {
-//    private final RedirectUrlProperties redirectUrlProperties;
-
-	@Autowired
-	RedirectUrlProperties redirectUrlProperties;
+	
+	// @RequiredArgsConstructor makes a constructor to initialize final field
+	// STS says redirectUrlProperties can be uninitialized, but it works fine.
+	// Otherwise, @Autowired can be used.
+	private final RedirectUrlProperties redirectUrlProperties;	
+//	@Autowired
+//	RedirectUrlProperties redirectUrlProperties;
 	
     @Autowired
     InquiryRepository repository;
 
+    // @Data annotation in RedirectUrlProperties class makes getter and setter at compiling
+    // STS says getUrl is undefined, but it works fine.
     public String buildAdminRedirectUrl(String url) {
         return UriComponentsBuilder.fromUriString(redirectUrlProperties.getUrl() + url).toUriString();
     }
@@ -75,6 +80,8 @@ public class RootController {
         return "root/edit";
     }
 
+    // @Data annotation for InquiryForm class makes getter and setter
+    // STS says setId is undefined, but it works fine
     @PutMapping("{id}")
     public ModelAndView update(@PathVariable Long id, @ModelAttribute InquiryForm inquiryform) {
         inquiryform.setId(id);
