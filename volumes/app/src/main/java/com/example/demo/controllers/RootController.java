@@ -21,21 +21,24 @@ import java.util.List;
 import javax.transaction.Transactional;
 import com.example.demo.controllers.RedirectUrlProperties;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 @Controller
 @RequestMapping("/")
-@Transactional
-@RequiredArgsConstructor
+@Transactional					//roll back at exception handling
+@RequiredArgsConstructor		//making constructor that taking initialized arguments for final field
 public class RootController {
 	
-	// @RequiredArgsConstructor makes a constructor to initialize final field
-	// STS says redirectUrlProperties can be uninitialized, but it works fine.
-	// Otherwise, @Autowired can be used.
+	//  @RequiredArgsConstructor makes a constructor to initialize final field
+	//  STS says redirectUrlProperties can be uninitialized, but it works fine.
+	//  Otherwise, @Autowired can be used.
 	private final RedirectUrlProperties redirectUrlProperties;	
-//	@Autowired
-//	RedirectUrlProperties redirectUrlProperties;
+	//	@Autowired
+	//	RedirectUrlProperties redirectUrlProperties;
 	
     @Autowired
     InquiryRepository repository;
@@ -51,7 +54,7 @@ public class RootController {
         return "root/index";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/list")	//applied at viewing /list
     public String inquiryList(Model model) {
         List<InquiryForm> items = repository.findAll();
         model.addAttribute("items", items);
@@ -94,4 +97,8 @@ public class RootController {
         repository.deleteById(id);
         return new ModelAndView("redirect:" + buildAdminRedirectUrl("/list"));
     }
+   
+    
 }
+
+
