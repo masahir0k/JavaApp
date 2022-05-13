@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@ConfigurationProperties(prefix="spring.redirect")
+@ConfigurationProperties(prefix="spring.redirect")	//getting spring.redirectinapplication.properties
 @Data
 public class RedirectUrlProperties {
     private String url;

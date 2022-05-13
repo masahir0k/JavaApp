@@ -50,6 +50,7 @@ public class MyErrorController implements ErrorController {
 
     // ビュー名を指定する
     // Thymeleaf テンプレート src/main/resources/templates/error.html を使用
+//    mav.setViewName("error");
     mav.setViewName("index");
 
     return mav;

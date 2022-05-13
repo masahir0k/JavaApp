@@ -36,9 +36,9 @@ public class RootController {
 	//  @RequiredArgsConstructor makes a constructor to initialize final field
 	//  STS says redirectUrlProperties can be uninitialized, but it works fine.
 	//  Otherwise, @Autowired can be used.
-	private final RedirectUrlProperties redirectUrlProperties;	
-	//	@Autowired
-	//	RedirectUrlProperties redirectUrlProperties;
+//	private final RedirectUrlProperties redirectUrlProperties;	
+		@Autowired
+		RedirectUrlProperties redirectUrlProperties;
 	
     @Autowired
     InquiryRepository repository;
@@ -66,7 +66,7 @@ public class RootController {
         return "root/form";
     }
 
-    @PostMapping("/form")
+    @PostMapping("/form")	//applied at viewing /form
     public String form(@Validated InquiryForm inquiryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "root/form";
@@ -76,7 +76,7 @@ public class RootController {
         return "root/form";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("{id}/edit")	//applied at id#
     public String edit(@PathVariable Long id, Model model) {
         InquiryForm inquiryform = repository.findById(id).get();
         model.addAttribute("inquiryform", inquiryform);
